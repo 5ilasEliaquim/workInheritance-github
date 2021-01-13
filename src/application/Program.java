@@ -1,0 +1,61 @@
+ package application;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
+import entitites.Employee;
+import entitites.OutSourcedEmployee;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		List<Employee> list = new ArrayList<>();
+		
+		System.out.print("Enter the number of employees: ");
+		int n = sc.nextInt();
+		
+		for(int i=1; i<=n;i++) {
+			System.out.print("Employee #"+ i+ "data:" );
+			System.out.println("Outsoucerd ? (y/n)");
+			char ch = sc.next().charAt(0);
+			System.out.print("Name: ");
+			sc.nextLine();
+			String name= sc.nextLine();
+			System.out.print("Hours: ");
+			int hours = sc.nextInt();
+			System.out.print("Valuer per hours: ");
+			double valuePerHour = sc.nextDouble();
+			
+			 if(ch == 'y') {
+				 System.out.print("Additional Charge: ");
+				 double additionalCharge = sc.nextDouble();
+				 list.add(new OutSourcedEmployee(name, hours, valuePerHour, additionalCharge));
+				 
+			 }else {
+				 list.add( new Employee(name, hours, valuePerHour));
+			 }
+			 
+			 System.out.println();
+			 System.out.println("Payements");
+			 for(Employee emp : list) {
+				 System.out.println(emp.getName()+ "- $"+ String.format("%.2", emp.payment()))
+				 ;
+			 }
+			
+		}
+		
+		
+		
+		
+		sc.close();
+		
+
+	}
+
+}
